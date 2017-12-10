@@ -7,13 +7,13 @@ namespace :bundler do
   Bundler::GemHelper.install_tasks
 end
 
-desc "Generate a Makefile using qmake"
-file 'Makefile' do
+desc "Generate a Makefile.tmp using qmake"
+file 'Makefile.tmp' do
   CapybaraWebkitBuilder.makefile('CONFIG+=test') or exit(1)
 end
 
 desc "Regenerate dependencies using qmake"
-task :qmake => 'Makefile' do
+task :qmake => 'Makefile.tmp' do
   CapybaraWebkitBuilder.qmake or exit(1)
 end
 

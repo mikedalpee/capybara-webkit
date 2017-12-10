@@ -205,6 +205,10 @@ module Capybara::Webkit
       command("FindModal", id)
     end
 
+    def dump_env
+      command("DumpEnv")
+    end
+
     def url_blacklist=(black_list)
       warn '[DEPRECATION] Capybara::Webkit::Browser#url_blacklist= ' \
         'is deprecated. Please use page.driver.block_url instead.'

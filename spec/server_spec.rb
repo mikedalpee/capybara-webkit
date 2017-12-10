@@ -76,6 +76,18 @@ describe Capybara::Webkit::Connection do
     expect(response).to include("Hey there")
   end
 
+  it "dumps the server's environment" do
+    url = "http://#{@rack_server.host}:#{@rack_server.port}/"
+    server = start_server(server_env: {"THIS"=>"THAT"})
+    socket = connect_to(server)
+    socket.puts "DumpEnv"
+    socket.puts 0
+    expect(socket.gets).to eq "ok\n"
+    response_length = socket.gets.to_i
+    response = socket.read(response_length)
+    expect(response).to include("THIS=THAT")
+   end
+
   it "forwards stderr to the given IO object" do
     read_io, write_io = IO.pipe
     server = start_server(stderr: write_io)

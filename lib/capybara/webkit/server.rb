@@ -19,6 +19,9 @@ module Capybara
         else
           @output_target = $stderr
         end
+        if options.has_key?(:server_env)
+          @server_env = options[:server_env]
+        end
       end
 
       def start
@@ -36,12 +39,12 @@ module Capybara
           @pid,
             @pipe_stdin,
             @pipe_stdout,
-            @pipe_stderr = IO.popen4(SERVER_PATH)
+            @pipe_stderr = @server_env.nil? ? IO.popen4(SERVER_PATH) : IO.popen4(@server_env,SERVER_PATH)
         else
           @pipe_stdin,
             @pipe_stdout,
             @pipe_stderr,
-            @wait_thr = Open3.popen3(SERVER_PATH)
+            @wait_thr = @server_env.nil? ? Open3.popen3(SERVER_PATH) : Open3.popen3(@server_env,SERVER_PATH)
         end
       end
 

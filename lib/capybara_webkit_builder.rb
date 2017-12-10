@@ -65,7 +65,7 @@ module CapybaraWebkitBuilder
   end
 
   def clean
-    File.open("Makefile", "w") do |file|
+    File.open("Makefile.tmp", "w") do |file|
       file.print "all:\n\t@echo ok\ninstall:\n\t@echo ok"
     end
   end
