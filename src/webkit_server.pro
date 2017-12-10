@@ -92,7 +92,8 @@ HEADERS = \
   MissingContentHeaderRequestHandler.h \
   CustomHeadersRequestHandler.h \
   NetworkRequestFactory.h \
-  UnknownUrlHandler.h
+  UnknownUrlHandler.h \
+  DumpEnv.h
 
 SOURCES = \
   BlockUrl.cpp \
@@ -178,7 +179,8 @@ SOURCES = \
   MissingContentHeaderRequestHandler.cpp \
   CustomHeadersRequestHandler.cpp \
   NetworkRequestFactory.cpp \
-  UnknownUrlHandler.cpp
+  UnknownUrlHandler.cpp \
+  DumpEnv.cpp
 
 RESOURCES = webkit_server.qrc
 QT += network

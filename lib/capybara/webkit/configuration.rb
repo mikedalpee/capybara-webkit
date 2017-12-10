@@ -31,6 +31,7 @@ module Capybara
       attr_accessor :timeout
       attr_writer :skip_image_loading
       attr_accessor :raise_javascript_errors
+      attr_accessor :server_env
 
       def initialize
         @allowed_urls = []
@@ -43,6 +44,7 @@ module Capybara
         @stderr = $stderr
         @timeout = -1
         @raise_javascript_errors = false
+        @server_env = {}
       end
 
       def allow_url(url)
@@ -85,6 +87,12 @@ module Capybara
         @proxy = proxy
       end
 
+      def set_server_env(env)
+        if env.is_a? Hash
+          @server_env = env
+        end
+      end
+
       def to_hash
         {
           allowed_urls: allowed_urls,
@@ -97,6 +105,7 @@ module Capybara
           stderr: stderr,
           timeout: timeout,
           raise_javascript_errors: raise_javascript_errors,
+          server_env: server_env
         }
       end
     end

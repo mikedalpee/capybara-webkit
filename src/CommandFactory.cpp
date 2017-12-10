@@ -53,6 +53,7 @@
 #include "SetUnknownUrlMode.h"
 #include "AllowUrl.h"
 #include "BlockUrl.h"
+#include "DumpEnv.h"
 
 CommandFactory::CommandFactory(WebPageManager *manager, QObject *parent) : QObject(parent) {
   m_manager = manager;

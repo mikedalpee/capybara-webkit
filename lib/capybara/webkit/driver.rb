@@ -339,6 +339,10 @@ module Capybara::Webkit
       @browser.authenticate(username, password)
     end
 
+    def dump_env
+      @brower.dump_env
+    end
+
     def timeout
       deprecate_and_replace_with_config "timeout"
       @browser.timeout
