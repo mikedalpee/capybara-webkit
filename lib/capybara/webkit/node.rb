@@ -17,7 +17,7 @@ module Capybara::Webkit
     def [](name)
       name = name.to_s
 
-      /(<?<request>property|attribute):\s*(?<id>.+)/ =~ name
+      /(?<request>property|attribute):\s*(?<id>.+)/ =~ name
       unless request.nil?
         val = invoke(request,id)
       else

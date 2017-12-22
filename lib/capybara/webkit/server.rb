@@ -64,7 +64,7 @@ module Capybara
         if match = line.to_s.match(/listening on port: (\d+)/)
           match[1].to_i
         else
-          raise ConnectionError, "#{SERVER_PATH} failed to start: #{line}."
+          raise ConnectionError, "#{SERVER_PATH} failed to start."
         end
       end
 
