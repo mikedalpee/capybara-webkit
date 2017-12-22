@@ -24,7 +24,7 @@ module Capybara::Webkit
         val = invoke(:attribute, name) && invoke(:property, name)
       else
         val = invoke(:property, name)
-        val = invoke(:attribute, name) if val.nil? || (val.is_a?(Hash) && name != "attributes")
+        val = invoke(:attribute, name) if val.nil?
       end
       val
     end
