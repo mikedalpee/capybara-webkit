@@ -16,10 +16,10 @@ module Capybara::Webkit
 
     def [](name)
       name = name.to_s
-      /property:\s*(?<property_name>.+)/ =~ name
-      unless property_name.nil?
-        return invoke(:property, property_name)
-      end
+
+      /(<?<request>property|attribute):\s*(?<id>.+)/ =~ name
+      return invoke(request,id) unless request.nil?
+
       tn = tag_name
       if (tn == "img" && name == "src") || (tn == "a" && name == "href")
         # Although the attribute matters, the property is consistent. Return that in
