@@ -18,16 +18,19 @@ module Capybara::Webkit
       name = name.to_s
 
       /(<?<request>property|attribute):\s*(?<id>.+)/ =~ name
-      return invoke(request,id) unless request.nil?
-
-      tn = tag_name
-      if (tn == "img" && name == "src") || (tn == "a" && name == "href")
-        # Although the attribute matters, the property is consistent. Return that in
-        # preference to the attribute for links and images.
-        # if attribute exists get the property
-        val = invoke(:attribute, name) && invoke(:property, name)
+      unless request.nil?
+        val = invoke(request,id)
       else
-        val = invoke(:attribute, name)
+        tn = tag_name
+        if (tn == "img" && name == "src") || (tn == "a" && name == "href")
+          # Although the attribute matters, the property is consistent. Return that in
+          # preference to the attribute for links and images.
+          # if attribute exists get the property
+          val = invoke(:attribute, name) && invoke(:property, name)
+        else
+          val = invoke(:attribute, name)
+        end
+      end
       val
     end
 
