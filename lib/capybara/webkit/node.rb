@@ -28,7 +28,8 @@ module Capybara::Webkit
           # if attribute exists get the property
           val = invoke(:attribute, name) && invoke(:property, name)
         else
-          val = invoke(:attribute, name)
+          val = invoke(:property, name)
+          val = invoke(:attribute, name) if val.nil? || val.is_a?(Hash)
         end
       end
       val
